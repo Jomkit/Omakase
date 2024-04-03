@@ -1,0 +1,6 @@
+/venv/
+/SECRETS.py
+/__pycache__/
+/api_call.py
+tests/__pycache__/test_routes.cpython-37.pyc
+tests/__pycache__/test_api.cpython-37.pyc

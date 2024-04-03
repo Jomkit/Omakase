@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}unauthorized{% endblock title %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="display-1">401 - Unauthorized Access</h1>
+        <p class="lead">Sorry, looks like you don't have access to this page</p>
+    <div class="col">
+        <img class="img-thumbnail" src="https://images.pexels.com/photos/128817/pexels-photo-128817.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="sad dog" style="width:400px">
+    </div>
+    <div class="col">
+        <a href="{{ url_for('landing_page') }}" class="btn btn-primary my-3 float-start">Home</a>
+    </div>
+</div>
+{% endblock content %}

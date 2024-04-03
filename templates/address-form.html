@@ -1,0 +1,21 @@
+<form id="address-form" method="POST">
+    {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+
+    {% for field in form
+            if field.widget.input_type != 'hidden' %}
+
+            {{ field.label }}
+            {{ field(class_='form-control') }}
+
+        <p>
+        {% for error in field.errors %}
+        <small class="form-text text-danger">
+            {{ error }}
+        </small>
+        {% endfor %}
+        </p>
+
+    {% endfor %}
+
+    <button class="btn btn-success btn-lg" type="submit">Submit</button>
+</form>
