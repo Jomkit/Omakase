@@ -3,7 +3,7 @@ from flask import Flask, request, redirect, render_template, flash, url_for, ses
 from flask_login import LoginManager, login_user, logout_user
 from flask_authorize import Authorize
 from flask_debugtoolbar import DebugToolbarExtension
-from SECRETS import SECRET_KEY
+# from SECRETS import SECRET_KEY
 from models import db, connect_db, Restaurant, User, Role, Group, MenuItem, Ingredient, Intolerant, Table, Order, OrderedItems
 from forms import AddMenuItemForm, TakeoutForm, DeliveryForm, PaymentMethodForm, SignupForm, LoginForm, SelectTableForm
 import os
