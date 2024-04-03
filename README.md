@@ -1,6 +1,6 @@
 # Omakase OMS
 
-**A multi-page web application that facilitates order management, geared towards small-businesses. Omakase allows restaurant owners to set up their own menus and manage their employees. Customers are also able to order food from their own devices, choosing dining in, takeout, or delivery, as desired.**
+**Captsone Project 1 for Springboard Software Engineering Career Track (Bootcamp). Omakase is a multi-page web application that facilitates order management, geared towards small-businesses. Omakase allows restaurant owners to set up their own menus and manage their employees. Customers are also able to order food from their own devices, choosing dining in, takeout, or delivery, as desired.**
 
 **This app was built using Python, specifically the Flask web app framework, JavaScript jQuery, and PostgreSQL for databasing.**
 
