@@ -4,7 +4,7 @@
 
 **This app was built using Python, specifically the Flask web app framework, JavaScript jQuery, and PostgreSQL for databasing.**
 
-Try out the app at: [Omakase OMS](https://github.com/hatchways-community/capstone-project-one-730961227c7e4439bdc8b03ed6c3cd4d.git)
+Try out the app at: [Omakase OMS](https://omakase-ma8t.onrender.com)
 
 ## App Features
 
