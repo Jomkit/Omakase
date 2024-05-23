@@ -26,6 +26,7 @@
                     </div>
                 </div>
             </li>
+<<<<<<< HEAD
             {% if not item.in_stock %}
             <li class="list-group-item text-danger">SOLD OUT</li>
             {% endif %}
@@ -39,6 +40,11 @@
         {% else %}
         {# add a button to edit the item #}
         {% endif %}
+=======
+            <li class="list-group-item">A third item</li>
+        </ul>
+        <a href="#" class="btn btn-primary m-2">Add</a>
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
     </div>
 </div>
 {% endmacro %}
@@ -211,7 +217,11 @@
 {% macro modalButton(order) %}
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order{{ order.id }}Modal">
+<<<<<<< HEAD
   Info
+=======
+  Edit
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 </button>
 {% endmacro %}
 
@@ -237,7 +247,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<<<<<<< HEAD
         {# <button type="button" class="btn btn-primary">Save changes</button> #}
+=======
+        <button type="button" class="btn btn-primary">Save changes</button>
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
       </div>
     </div>
   </div>
@@ -255,6 +269,7 @@
             if field.widget.input_type != 'hidden' %}
 
         
+<<<<<<< HEAD
         {% if field.type == "DecimalField" %}
 
             {{ field.label(class_='form-check-label') }}
@@ -264,6 +279,9 @@
         </div>
         
         {% elif field.type == "BooleanField" %}
+=======
+        {% if field.type == "BooleanField" %}
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 
         <div class="form-check form-check-inline">
             {{ field.label(class_='form-check-label') }}

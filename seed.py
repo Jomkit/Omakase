@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 from models.user_models import Role, Group, User
 from models.db import db
 from models.item_models import MenuItem, Intolerant, Ingredient
 from models.order_models import OrderedItems, Order
 from models.restaurant_models import Table, Restaurant
+=======
+from models import User, Role, Group, Restaurant, MenuItem, Intolerant, Ingredient, ItemIngredient, RestaurantMenu, OrderedItems, Table, Order, db
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 from datetime import datetime, timedelta
 from app import app
 
@@ -14,7 +18,11 @@ with app.app_context():
     roles = [
         Role(name='waitstaff'),
         Role(name='kitchen'),
+<<<<<<< HEAD
         Role(name='manager')
+=======
+        Role(name='admin')
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
     ]
     db.session.add_all(roles)
     
@@ -26,13 +34,18 @@ with app.app_context():
     db.session.commit()
 
     restaurants = [
+<<<<<<< HEAD
         Restaurant(name="Example Restaurant", address="52 Main Street")
+=======
+        Restaurant(name="Test Restaurant", address="52 Main Street")
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
     ]
 
     db.session.add_all(restaurants)
     db.session.commit()
 
     employees = [
+<<<<<<< HEAD
         User(restaurant_id=1, name='test', uname='testmanager', password=User.hash_pw('123test123'), address='123 Test St.', birthday='1/1/1990',
              roles=[Role.query.filter_by(name='manager').first()], 
              groups=[Group.query.filter_by(name='employee').first()]),
@@ -53,15 +66,43 @@ with app.app_context():
         # User(restaurant_id=1, name='Jacque', password=User.hash_pw('regTestUser6'), address='1 Main St', birthday='1/4/1980', 
         #      roles=[Role.query.filter_by(name='manager').first()], 
         #      groups=[Group.query.filter_by(name='employee').first()])
+=======
+        User(restaurant_id=1, name='test', uname='testadmin', password=User.hash_pw('123test123'), address='123 Test St.', birthday='1/1/1990',
+             roles=[Role.query.filter_by(name='admin').first()], 
+             groups=[Group.query.filter_by(name='employee').first()]),
+        User(restaurant_id=1, name='Jeff', address='1 Jeff Ln', birthday='1/1/1990',
+             roles=[Role.query.filter_by(name='waitstaff').first()], 
+             groups=[Group.query.filter_by(name='employee').first()]),
+        User(restaurant_id=1, name='Karly', address='2 Jeff Ln', birthday='1/2/1990',
+             roles=[Role.query.filter_by(name='waitstaff').first()], 
+             groups=[Group.query.filter_by(name='employee').first()]),
+        User(restaurant_id=1, name='Greg', address='1 Main St', birthday='1/4/1980',
+             roles=[Role.query.filter_by(name='kitchen').first()], 
+             groups=[Group.query.filter_by(name='employee').first()]),
+        User(restaurant_id=1, name='Julianne', address='1 Main St', birthday='1/4/1980', 
+             groups=[Group.query.filter_by(name='employee').first()]),
+        User(restaurant_id=1, name='John', address='1 Main St', birthday='1/4/1980', 
+             roles=[Role.query.filter_by(name='admin').first()], 
+             groups=[Group.query.filter_by(name='employee').first()]),
+        User(restaurant_id=1, name='Jacque', address='1 Main St', birthday='1/4/1980', 
+             roles=[Role.query.filter_by(name='admin').first()], 
+             groups=[Group.query.filter_by(name='employee').first()])
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
     ]
 
     db.session.add_all(employees)
     db.session.commit()
 
     customers = [
+<<<<<<< HEAD
         User(name='Ken', address='1 Main St', phone_number='123-456-0000', password=User.hash_pw('TemporaryPW'), birthday='1/1/1970', groups=[Group.query.filter_by(name='customer').first()]),
         User(name='Barbara', address='1 Main St', phone_number='123-654-0000', password=User.hash_pw('TemporaryPW2'), birthday='8/1/1978', groups=[Group.query.filter_by(name='customer').first()]),
         User(name='Glenn', address='54 Main St', phone_number='123-456-7890', password=User.hash_pw('TemporaryPW3'), birthday='1/1/1999', groups=[Group.query.filter_by(name='customer').first()])
+=======
+        User(name='Ken', address='1 Main St', phone_number='123-456-0000', birthday='1/1/1970', groups=[Group.query.filter_by(name='customer').first()]),
+        User(name='Barbara', address='1 Main St', phone_number='123-654-0000', birthday='8/1/1978', groups=[Group.query.filter_by(name='customer').first()]),
+        User(name='Glenn', address='54 Main St', phone_number='123-456-7890', birthday='1/1/1999', groups=[Group.query.filter_by(name='customer').first()])
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
     ]
 
     db.session.add_all(customers)

@@ -1,4 +1,5 @@
 /venv/
+<<<<<<< HEAD
 /.env
 /__pycache__/
 /api_call.py
@@ -18,3 +19,10 @@ blueprints/api/__pycache__/api_routes.cpython-37.pyc
 blueprints/customers/__pycache__/customers_routes.cpython-37.pyc
 blueprints/employees/__pycache__/employees_routes.cpython-37.pyc
 models/__pycache__/__init__.cpython-37.pyc
+=======
+/SECRETS.py
+/__pycache__/
+/api_call.py
+tests/__pycache__/test_routes.cpython-37.pyc
+tests/__pycache__/test_api.cpython-37.pyc
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e

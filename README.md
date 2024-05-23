@@ -1,11 +1,16 @@
 # Omakase OMS
 
+<<<<<<< HEAD
 **A multi-page web application that facilitates order management, geared towards small-businesses. Omakase allows restaurant owners to set up their own menus and manage their employees. Customers are also able to order food from their own devices, choosing dining in, takeout, or delivery, as desired.**
+=======
+**Captsone Project 1 for Springboard Software Engineering Career Track (Bootcamp). Omakase is a multi-page web application that facilitates order management, geared towards small-businesses. Omakase allows restaurant owners to set up their own menus and manage their employees. Customers are also able to order food from their own devices, choosing dining in, takeout, or delivery, as desired.**
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 
 **This app was built using Python, specifically the Flask web app framework, JavaScript jQuery, and PostgreSQL for databasing.**
 
 Try out the app at: [Omakase OMS](https://omakase-ma8t.onrender.com)
 
+<<<<<<< HEAD
 ### Quickstart
 - After following [Setup](#setup) below, all you have to do to get started is run the flask server and you'll be greeted with the landing page. Either run through the userflow for customers by clicking any one of the Header Tabs or the options "Dining In," "Takeout," or "Delivery."
 - If you'd like to check out the employee userflow, from the base url add `/login`. I recommend using the pre-seeded manager user instance, username: "testmanager" and password: "123test123."
@@ -20,11 +25,27 @@ Try out the app at: [Omakase OMS](https://omakase-ma8t.onrender.com)
 - Restaurant staff can monitor active orders and view order history from the employee dashboard.
 
 ![Omakase employee dashboard](/static/images/emp_dashboard_v2.png)
+=======
+## App Features
+
+![Omakase landing page](/static/images/oms_landing.png)
+*Website landing page*
+
+- Restaurant owners can upload images, descriptions of their business, and add employees to different roles. 
+- Restaurant staff with proper authorization (admin) can add menu items to the restaurant menu.  
+- Restaurant staff can monitor active orders and view order history from the employee dashboard.
+
+![Image of employee dashboard](/static/images/emp_db.png)
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 *Employee Dashboard*
 
 - List of all employees, their employee id, name, role, and phone number.
 
+<<<<<<< HEAD
 ![Omakase employee list](/static/images/employee_list_v2.png)
+=======
+![Image of employee list page](/static/images/emp_list.png)
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 *Employee List Page*
 
 - Customers can choose whether to dine in, get takeout, or order delivery. (picture?)
@@ -33,8 +54,12 @@ Try out the app at: [Omakase OMS](https://omakase-ma8t.onrender.com)
     - Delivery requires name and phone number as well, as well as street, city, and state. 
 - Customers can order food from the menu, which will be added to their order and update a bill on the side of the screen. 
 - Customers can press a button to request assistance from the waitstaff. 
+<<<<<<< HEAD
 - When ready, customers can checkout and see their itemized bill. 
 - After choosing a payment option, they are directed to waitstaff to complete the payment process
+=======
+- When ready, customers can check out and see their itemized bill. 
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 
 ## User Flow
 
@@ -42,11 +67,23 @@ There are two main user flows associated with this app.
 
 ### Restaurant Staff
 
+<<<<<<< HEAD
 - A staff member must append `/login` to the url to go to the login page.
 - Upon signing in, they are taken to the employee dashboard. An "Employees" dropdown menu is displayed in the navbar.
 - This dropdown menu has multiple options; staff members may add a menu item, go to the employee list, or add an employee.
     - Clicking the "Add Menu Item" brings the user to a form where they can add information for a new menu item, including name, description, cost, and image.
     - Clicking "Employee List" brings the user to the employee list. Only managers have the authority to delete employees.
+=======
+- A staff member logs in from the landing page
+- They are taken to the employee dashboard. An "Employees" dropdown menu is displayed in the navbar.
+
+![Image of employee dropdown](/static/images/emp_dropdown.png)
+*Employee Dropdown Menu*
+
+- This dropdown menu has multiple options; staff members may add a menu item, go to the employee list, or add an employee.
+    - Clicking the "Add Menu Item" brings the user to a form where they can add information for a new menu item, including name, description, cost, and image.
+    - Clicking "Employee List" brings the user to the employee list.
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
     - Clicking "Add Employee" takes the user to a form where they can add a new employee.
 
 ### Customers
@@ -62,6 +99,7 @@ There are two main user flows associated with this app.
 - This payment page doesn't actually handle payments, but lets the customer pick a payment type which is saved to the order.
 - After they've picked their payment type users are taken to a final "Thank You" page, where they can exit the page safely.
 
+<<<<<<< HEAD
 ## Setup 
 - The first step to setting up this project locally is to copy it. Either [forking](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) or [cloning](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) the repository will do.
 - If you don't want to globally install dependencies, make sure to set up a virtual environment as well. 
@@ -87,6 +125,10 @@ There are two main user flows associated with this app.
     - Simply replace `test_basic_routes` with whichever test file you'd like to run specifically, in the `tests` folder.
 
 ## Resources Used
+=======
+
+## Resources
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 ### API
 - Created custom RESTful API to handle dynamic order updates.
 
@@ -96,3 +138,10 @@ There are two main user flows associated with this app.
 - JavaScript
 - jQuery
 - Bootstrap
+<<<<<<< HEAD
+=======
+
+////////////////////////////////////////////////////
+
+[Here is an example of a previous project.](https://github.com/juliahazer/chart-my-team)
+>>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
