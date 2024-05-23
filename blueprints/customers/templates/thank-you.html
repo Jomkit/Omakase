@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Thank You!{% endblock title %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="display-1">Thank you for your patronage!</h1>
+    <h5>Please proceed to the front register to continue with your payment method: {{pay_method}}</h5>
+    <h5>Come back soon!</h5>
+    <h5>This page may be safely closed</h5>
+    <a href="{{ url_for('customers.landing_page') }}" class="btn btn-lg btn-primary">Home</a>
+</div>
+{% endblock content %}

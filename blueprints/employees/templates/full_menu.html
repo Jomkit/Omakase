@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid px-0 mx-0 row position-relative text-center" style="min-height:100vh;">
+    
+    {# Menu Content #}
+    <div class="col px-0 order-lg-1 bg-dark" id="menu-area">
+        <div class="container-fluid">
+            <h1 class="display-1 mt-3 text-white">Full Menu</h1>
+
+            {% from 'macros.html' import menu_cards_generator, menu_tab_header, menu_tab with context %}
+
+            <ul class="nav nav-tabs" id="menuTab" role="tablist">
+            
+                {{ menu_tab_header(types) }}
+            
+            </ul>
+
+            <div class="row">
+                <div class="tab-content" id="menuTabContent">
+                    {{ menu_tab(items, types)}}
+
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="static/scripts/order.js"></script>
+{% endblock script %}

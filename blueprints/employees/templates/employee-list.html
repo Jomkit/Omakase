@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Employee List{% endblock title %}
+
+{% block content %}
+<h1 class="display-1">Employee List</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">User ID</th>
+      <th scope="col">Username</th>
+      <th scope="col">Name</th>
+      <th scope="col">Role</th>
+      <th scope="col">Telephone Number</th>
+      <th scope="col">Email Address</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for employee in employees %}
+    {% if employee.groups[0].name in ['employee'] %}
+        <tr>
+        <th scope="row">{{employee.id}}</th>
+        <td>{{ employee.username }}</td>
+        <td>{{ employee.name }}</td>
+        {% if employee.roles %}
+            <td>{{ employee.roles[0].name }}</td>
+        {% else %}
+            <td class="text-danger">Unassigned</td>
+        {% endif %}
+        <td>{{ employee.phone_number }}</td>
+        <td>{{ employee.email }}</td>
+        {% if authorize.has_role('manager') %}
+        <td>
+          <form onsubmit="return confirm('Do you really want to delete the user {{employee.uname}}?');" action="{{url_for('employees.delete_user', id=employee.id)}}" method="post">
+            <button class="btn" type="submit">
+              <i class="fa-solid fa-trash-can text-danger"></i>
+            </button>
+          </form>
+        </td>
+        {% else %}
+        <td></td>
+        {% endif %}
+        </tr>
+    {% endif %}
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

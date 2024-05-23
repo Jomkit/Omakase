@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+Omakase - Landing Page
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid bg-dark text-light p-3">
+    <div class="col col-l">
+        <h1 class="display-1">{{ restaurant.name }}</h1>
+        <p class="lead mx-4">
+            {{ restaurant.description }}
+        </p>
+        
+        <p><b>Address:</b> {{ restaurant.address }}</p>
+        <p><b>Call:</b> {{ restaurant.phone_number }}</p>
+    </div>
+
+    <div class="container-fluid row text-center">
+        <div class="col-md-4 d-grid mb-2">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('customers.assign_table_number') }}">Dining In</a>
+        </div>
+        <div class="col-md-4 d-grid mb-2">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('customers.takeout_page') }}">Takeout</a>
+        </div>
+        <div class="col-md-4 d-grid mb-2">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('customers.delivery_page') }}">Delivery</a>
+        </div>
+    </div>
+</div>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg" class="d-block w-100" alt="restaurant-stock-1">
+    </div>
+    <div class="carousel-item">
+      <img src="https://images.pexels.com/photos/696218/pexels-photo-696218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="restaurant-stock-2">
+    </div>
+    <div class="carousel-item">
+      <img src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="restaurant-food-1">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+{% endblock content %}

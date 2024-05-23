@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid px-0 mx-0 row position-relative text-center" style="min-height:100vh;">
+
+<div class="col d-xl-none position-fixed text-end">
+    {# Shopping cart icon #}
+    <button class="btn btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#bill-area" aria-expanded="false" aria-controls="bill-area" style=>
+        <i class="fa-solid fa-cart-shopping text-info"></i>
+    </button>
+</div>
+
+    {% from 'macros.html' import bill with context %}
+    
+    <div class="collapse mx-auto d-xl-block col-xl-4 order-1 order-xl-2" id="bill-area">
+        {# Bill content #}
+        {{ bill(title='Itemized Bill', btn_link='customers.checkout_page', btn_name='Checkout') }}
+    </div>
+    
+    {# Menu Content #}
+    <div class="col-xl-8 px-0 order-2 order-lg-1 bg-dark" id="menu-area">
+        <div class="container-fluid float-start">
+            <h1 class="display-1 mt-3 text-white">Menu</h1>
+
+            {% from 'macros.html' import menu_cards_generator, menu_tab_header, menu_tab with context %}
+
+            <ul class="nav nav-tabs" id="menuTab" role="tablist">
+            
+                {{ menu_tab_header(types) }}
+            
+            </ul>
+
+            <div class="row">
+                <div class="tab-content" id="menuTabContent">
+                    {{ menu_tab(items, types)}}
+
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="static/scripts/order.js"></script>
+{% endblock script %}

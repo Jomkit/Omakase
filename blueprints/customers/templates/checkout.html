@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout{% endblock title %}
+
+{% block content %}
+<a href="{{ url_for('customers.order_page') }}" class="btn btn-info mt-3 mx-3">Go Back</a>
+<div class="container">
+    <div class="col text-center">
+        <p class="lead">Please check your order, and hit confirm below when you're ready to proceed to payment</p>
+    </div>
+</div>
+
+{% from 'macros.html' import bill with context %}
+{{ bill(title='Final Bill', btn_link='customers.payment_page', btn_name='Confirm') }}
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="static/scripts/order.js"></script>
+{% endblock script %}

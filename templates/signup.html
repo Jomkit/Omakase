@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Employee Signup{% endblock title %}
+
+{% block content %}
+
+{% from 'macros.html' import FormGenerator with context %}
+{{ FormGenerator(name=form_name, id_attr='signup') }}
+
+{% endblock content %}

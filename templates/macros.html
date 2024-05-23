@@ -1,0 +1,310 @@
+{% macro food_card(item) %}
+<div class="col-12 col-lg-4 col-xl-3">
+    <div class="card" id="{{ item.id }}" style="width: 100%;">
+        <img src="{{ item.image }}" class="card-img-top img-fluid" alt="{{ type }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <p class="card-text">{{ item.description }}</p>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col">
+                    </div>
+
+                    <div class="col">
+                    ${{ item.cost }}
+                    </div>
+
+                    <div class="col">
+                    {% if item.vegetarian %}
+                        <img class="float-end" style="max-width:40px; height: auto" src="/static/images/veg_logo_freepik.png" alt="vegetarian logo">
+                    {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% if not item.in_stock %}
+            <li class="list-group-item text-danger">SOLD OUT</li>
+            {% endif %}
+        </ul>
+        {% if not authorize.in_group('employee') %}
+            {% if item.in_stock %}
+            <a href="#" class="btn btn-primary m-2">Add</a>
+            {% else %}
+            <a href="#" class="btn btn-primary m-2 disabled">Add</a>
+            {% endif %}
+        {% else %}
+        {# add a button to edit the item #}
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro menu_tab_header(types) %}
+    {% for type in types %}
+        {% if loop.first %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="{{ type }}s-tab" data-bs-toggle="tab" data-bs-target="#{{ type }}s" type="button" role="tab" aria-controls="{{ type }}s" aria-selected="true">{{type.split() | first | capitalize}}s</button>
+        </li>
+        {% else %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="{{ type }}s-tab" data-bs-toggle="tab" data-bs-target="#{{ type }}s" type="button" role="tab" aria-controls="{{ type }}s" aria-selected="true">{{type.split() | first | capitalize}}s</button>
+        </li>
+
+        {% endif %}
+
+    {% endfor %}
+{% endmacro %}
+
+{% macro menu_cards_generator(items, type) %}
+
+<div class="container-fluid row gy-3">
+    {% for item in items %}
+    {% if item.meal_type == type %}
+        {{ food_card(item=item) }}
+    {% endif %}
+    
+    {% endfor %}
+    
+</div>
+
+{% endmacro %}
+
+{% macro menu_tab(items, types) %}
+{% for type in types %}
+
+    {% if loop.first %}
+    <div class="tab-pane fade show active" id="{{ type }}s" role="tabpanel" aria-labelledby="{{ type }}-tab">
+        {{ menu_cards_generator(items, type) }}
+    </div>
+    {% else %}
+    <div class="tab-pane fade" id="{{ type }}s" role="tabpanel" aria-labelledby="{{ type }}-tab">
+        {{ menu_cards_generator(items, type) }}
+    </div>
+    {% endif %}
+
+{% endfor %}
+
+{% endmacro %}
+
+{% macro bill(title, btn_link, btn_name) %}
+<div class="p-3" id="bill" style="height:100%">
+    <div class="container-fluid bg-white p-2 rounded position-relative" id="bill-area" style="min-height:700px">
+        <h3 class="display-3 bg-danger rounded">{{ title }}</h3>
+        <h4 class="display-5">Order #<span id="curr-order">{{ session['current_order_id'] }}</span></h4>
+
+        {% if session['current_table'] %}
+        <p class="lead">Table {{ session['current_table'] }}</p>
+        {% endif %}
+        
+        <div class="container-fluid">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Rate</th>
+                    <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="bill-items">
+                </tbody>
+            </table>
+            
+        </div>
+        <div class="container-fluid row justify-content-end position-absolute bottom-0 text-end mb-5">
+            <div class="col-auto">
+                <p>Subtotal:</p>
+                {% if order_type and order_type[0]=='Delivery' %}
+                <p>Delivery Cost: </p>
+                {% endif %}
+                <p>Taxes:</p>
+                <p>Final Total:</p>
+            </div>
+            <div class="col-6 row placeholder-wave">
+                <p class="placeholder" id="subtotal-cost">$0.00</p>
+                {% if order_type and order_type[0]=='Delivery' %}
+                <p class="placeholder" id="delivery-cost">$0.00</p>
+                {% endif %}
+                <p class="placeholder" id="taxes"></p>
+                <p class="placeholder" id="final-cost"><$0.00</p>
+            </div>
+        </div>
+        <div class="container-fluid row position-absolute bottom-0 my-3 btn-area">
+            <div class="col-6 d-grid">
+                <a href="{{ url_for(btn_link) }}" class="btn btn-lg btn-success">{{ btn_name }}</a>
+            </div>
+
+            <div class="col-6 d-grid">
+                <a href="#" class="btn btn-lg btn-warning" id="assist-btn">Assistance</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro order_card(order) %}
+<div class="card" style="width: 15rem;">
+    {% if order.active %}
+    <div class="order-active card-header bg-success text-center">
+    {% else %}
+    <div class="card-header bg-secondary text-center">
+    {% endif %}
+    <h4><b class="text-white timestamps">{{ order.timestamp.strftime("%m/%d/%Y, %H:%M:%S") }}</b></h4>
+    </div>
+    
+    <div class="card-body" id="{{order.id}}">
+        <h5 class="card-title">Order #{{order.id}}</h5>
+        {% if order.type == "Dining In" %}
+        <h6 class="card-subtitle mb-2 text-muted">{{order.type}} - Table {{order.table_number}}</h6>
+        {% else %}
+        <h6 class="card-subtitle mb-2 text-muted">{{order.type}}</h6>
+        {% endif %}
+        <div class="card-text">
+            {% for item in order.ordered_items %}
+            <p class="my-0">{{ menu_items|selectattr("id","equalto", item.menu_item_id)|map(attribute='name')|list|first }} x{{item.quantity}}</p>
+            {% endfor %}
+            <p>Total: ${{ order.total_cost }}</p>
+        </div>
+        {{ modalButton(order) }}
+        {% if order.active == true %}
+        <a href="#" class="btn btn-warning" id="toggle-active">Close Order</a>
+        {% else %}
+        <a href="#" class="btn btn-warning" id="toggle-active">Open Order</a>
+        {% endif %} 
+    </div>
+</div>
+
+{{ modalContent(order) }}
+{% endmacro %}
+
+{% macro order_card_detailed(order) %}
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Rate</th>
+            <th scope="col">Amount</th>
+            </tr>
+        </thead>
+        <tbody id="order-summary">
+        {% for item in order.ordered_items %}
+        
+            <tr>
+                <th scope="row">{{ menu_items|selectattr("id","equalto", item.menu_item_id)|map(attribute='name')|list|first }}</th>
+                <td>{{item.quantity}}</td>
+                <td>${{ menu_items|selectattr("id","equalto", item.menu_item_id)|map(attribute='cost')|list|first }}</td>
+                <td>$<span class="cost">{{ (menu_items|selectattr("id","equalto", item.menu_item_id)|map(attribute='cost')|list|first) * item.quantity }}</span></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+{% endmacro %}
+
+{% macro modalButton(order) %}
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order{{ order.id }}Modal">
+  Info
+</button>
+{% endmacro %}
+
+{% macro modalContent(order) %}
+<!-- Modal -->
+<div class="modal fade" id="order{{ order.id }}Modal" tabindex="-1" aria-labelledby="order{{ order.id }}ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+      <div class="container-fluid">
+      <div class="row">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="order{{ order.id }}ModalLabel">Order #{{ order.id }}</h5>
+      </div>
+      <div class="col">
+        <p class="text-muted">Ordered at: {{ order.timestamp.strftime("%I:%M:%S %p") }}</p>
+      </div>
+      </div>
+      </div>
+      <div class="modal-body">
+      {{ order_card_detailed(order) }}
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        {# <button type="button" class="btn btn-primary">Save changes</button> #}
+      </div>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro FormGenerator(name, id_attr) %}
+<div class="container p-3 bg-light">
+<h3 class="display-3">{{ name }}</h3>
+
+    <form id="{{ id_attr }}-form" method="POST">
+    {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+
+    {% for field in form
+            if field.widget.input_type != 'hidden' %}
+
+        
+        {% if field.type == "DecimalField" %}
+
+            {{ field.label(class_='form-check-label') }}
+        <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            {{ field(class_='form-control') }}
+        </div>
+        
+        {% elif field.type == "BooleanField" %}
+
+        <div class="form-check form-check-inline">
+            {{ field.label(class_='form-check-label') }}
+            {{ field(class_='form-check-input') }}
+        </div>
+        
+        {% elif field.type == "FieldList" %}
+
+        {{ field.label }}
+        <div class="container bg-white rounded py-2">
+            {% for subfield in field %}
+            {{ subfield(class_="form-control my-3") }}
+            {% endfor %}
+        </div>
+
+        {% elif field.type == "FormField" %}
+
+        {{ field.label }}
+        <div class="container bg-white rounded py-2">
+            {% for subfield in field if subfield.widget.input_type != 'hidden' %}
+            {{ subfield.label }}
+            {{ subfield(class_="form-control my-3") }}
+            {% endfor %}
+        </div>
+        
+        {% else %}
+            {{ field.label }}
+            {{ field(class_='form-control') }}
+        {% endif %}
+
+        <p>
+        {% for error in field.errors %}
+        <small class="form-text text-danger">
+            {{ error }}
+        </small>
+        {% endfor %}
+        </p>
+
+    {% endfor %}
+
+    <button class="btn btn-success btn-lg" type="submit">Submit</button>
+    </form>
+</div>
+{% endmacro %}

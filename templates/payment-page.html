@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Payment{% endblock title %}
+
+{% block content %}
+<div class="container">
+    {# <h1 class="display-1 text-center">Choose Your Payment Method</h1> #}
+    {% from 'macros.html' import FormGenerator with context %}
+    {{ FormGenerator('Choose Your Payment Method', 'payment-method')}}
+
+</div>
+{% endblock content %}
