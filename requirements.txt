@@ -17,6 +17,7 @@ Flask-Login==0.6.3
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==1.1.1
 greenlet==3.0.3
+gunicorn==22.0.0
 idna==3.6
 importlib-metadata==6.7.0
 ipython==7.34.0
