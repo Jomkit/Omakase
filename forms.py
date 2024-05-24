@@ -1,14 +1,8 @@
 from flask_wtf import FlaskForm
-<<<<<<< HEAD
 from wtforms import StringField, PasswordField, TextAreaField, DecimalField, SelectField, SelectMultipleField, BooleanField, DateField, TelField, EmailField, FormField, FieldList, widgets, Form
 from wtforms.fields import EmailField
 from markupsafe import Markup
 from wtforms.validators import DataRequired, Optional, Length, Regexp, Email, URL
-=======
-from wtforms import StringField, PasswordField, TextAreaField, DecimalField, SelectField, SelectMultipleField, BooleanField, FormField, FieldList, widgets, Form
-from markupsafe import Markup
-from wtforms.validators import DataRequired, Optional, EqualTo
->>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 
 # Code for custom MultiCheckboxField from
 # techcoil -> https://www.techcoil.com/blog/rendering-multiple-checkboxes-with-wtforms-and-bootstrap/ 
@@ -41,15 +35,9 @@ class MultiCheckboxField(SelectMultipleField):
 class AddMenuItemForm(FlaskForm):
     """Form for adding menu items"""
 
-<<<<<<< HEAD
     name = StringField("Menu Item Name*", validators=[DataRequired()])
 
     image = StringField("Image URL", validators=[Optional(), URL()], filters=[lambda x: x or None])
-=======
-    name = StringField("Menu Item Name", validators=[DataRequired()])
-
-    image = StringField("Image", validators=[Optional()], filters=[lambda x: x or None])
->>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 
     meal_type = SelectField("Meal Type", choices=[('entree','Entrees'),('appetizer', 'Appetizers'),('soup', 'Soups'), ('salad', 'Salads'),('beverage', 'Beverages'),('dessert','Desserts')])
     
@@ -59,11 +47,7 @@ class AddMenuItemForm(FlaskForm):
 
     description = TextAreaField('Description', validators=[Optional()])
 
-<<<<<<< HEAD
     cost = DecimalField('Cost*')
-=======
-    cost = DecimalField('Cost')
->>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
     
     # Single choice for now, will need to figure out how to add more later. Might use JS and a button
     ingredients = FieldList(StringField('Ingredients', validators=[Optional()], filters=[lambda x: x or None]), min_entries=3, max_entries=30)
@@ -86,10 +70,6 @@ class Address(Form):
     city = StringField("City", validators=[DataRequired()])
     state = StringField("State", validators=[DataRequired()])
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 class TakeoutForm(FlaskForm):
     contact_info = FormField(ContactInfo)
     
@@ -104,7 +84,6 @@ class PaymentMethodForm(FlaskForm):
 
 class SignupForm(FlaskForm):
     """Signup form for user, can be either customer or employee"""
-<<<<<<< HEAD
     first_name = StringField('First Name*', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[Optional()])
     password = PasswordField('Password*', validators=[DataRequired(), Length(min=8)])
@@ -117,26 +96,12 @@ class SignupForm(FlaskForm):
     address = StringField('Address', validators=[Optional()], filters=[lambda x: x or None])
     # birthday = DateField('Birthday', format='%m/%d/%y', validators=[DataRequired()])
     phone_number = TelField('Telephone Number*', validators=[DataRequired(), Length(min=10, max=14), Regexp(regex='^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$')])
-=======
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[Optional()])
-    password = PasswordField('Password')
-    # confirm = PasswordField('Confirm Password', validators=[EqualTo('password', 'passwords must match')])
-
-    roles = SelectField("Role")
-    
-    email = StringField('Email Address', validators=[DataRequired()])
-    address = StringField('Address', validators=[Optional()], filters=[lambda x: x or None])
-    birthday = StringField('Birthday', validators=[Optional()], filters=[lambda x: x or None])
-    phone_number = StringField('Telephone Number', validators=[DataRequired()])
->>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
 
 class SelectTableForm(FlaskForm):
-<<<<<<< HEAD
     table_number = SelectField('Tables', validators=[DataRequired()])
 
 class EditRestaurantForm(FlaskForm):
@@ -144,6 +109,3 @@ class EditRestaurantForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired()])
     phone_number = TelField('Restaurant Telephone Number', validators=[DataRequired(), Length(min=10, max=14), Regexp(regex='^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$')])
     description =TextAreaField('Description', validators=[DataRequired()])
-=======
-    table_number = SelectField('Tables', validators=[DataRequired()])
->>>>>>> 9337c390882ddbc36641358f2133bb8fa170838e

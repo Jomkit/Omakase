@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% block title %}Add Menu item{% endblock title %}
-
-{% block content %}
-{% from "macros.html" import FormGenerator with context %}
-
-{{ FormGenerator(name='Add Menu Item', id_attr='add-menu-item') }}
-
-{% endblock content %}
