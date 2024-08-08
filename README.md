@@ -27,7 +27,7 @@ Try out the app at: [Omakase OMS](https://omakase-ma8t.onrender.com)
 ![Omakase employee list](/static/images/employee_list_v2.png)
 *Employee List Page*
 
-- Customers can choose whether to dine in, get takeout, or order delivery. (picture?)
+- Customers can choose whether to dine in, get takeout, or order delivery.
     - Dining in has the option to choose a table.
     - Takeout requires inputting name, and phone number.
     - Delivery requires name and phone number as well, as well as street, city, and state. 
