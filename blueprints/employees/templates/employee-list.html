@@ -32,9 +32,15 @@
         {% if authorize.has_role('manager') %}
         <td>
           <form onsubmit="return confirm('Do you really want to delete the user {{employee.uname}}?');" action="{{url_for('employees.delete_user', id=employee.id)}}" method="post">
+            {% if employee.username==current_user.username %}
+            <button class="btn" type="submit" disabled>
+              <i class="fa-solid fa-trash-can text-danger"></i>
+            </button>
+            {% else %}
             <button class="btn" type="submit">
               <i class="fa-solid fa-trash-can text-danger"></i>
             </button>
+            {% endif %}
           </form>
         </td>
         {% else %}

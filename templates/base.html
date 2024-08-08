@@ -17,12 +17,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
+        {% if not authorize.in_group('employee') %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('customers.landing_page') }}">Home
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-        {% if not authorize.in_group('employee') %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('customers.assign_table_number')}}">Dining In</a>
         </li>
@@ -32,11 +32,10 @@
         <li class="nav-item">
           <a class="nav-link" href="{{  url_for('customers.delivery_page') }}">Delivery</a>
         </li>
-      
-        {# {% else %}
+        {% else %}
         <li class="nav-item">
-          <a href="#" class="nav-link">Customer View</a>
-        </li> #}
+          <a class="nav-link" href="{{ url_for('employees.dashboard')}}">Employee Dashboard</a>
+        </li>
         {% endif %}
 
         {% if authorize.in_group('employee') %}
@@ -45,17 +44,15 @@
             Employees
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('employees.dashboard')}}">Employee Dashboard</a></li>
             {# <li><a class="dropdown-item" href="{{ url_for('kitchen_dashboard')}}">Kitchen Dashboard</a></li> #}
             <li><a class="dropdown-item" href="{{ url_for('employees.show_employee_list') }}"> Employee List</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('employees.full_menu')}}">Full Menu</a></li>
 
             {% if authorize.has_role('manager') %}
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{{ url_for('employees.employee_signup') }}">Add Employee</a></li>
             <li><a class="dropdown-item" href="{{ url_for('employees.edit_restaurant') }}">Edit Restaurant Information</a></li>
             {% endif %}
-
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{{ url_for('employees.full_menu')}}">Full Menu</a></li>
             <li><a class="dropdown-item" href="{{ url_for('employees.add_menu_item')}}">Add Menu Item</a></li>
           </ul>
         </li>

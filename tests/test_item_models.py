@@ -10,7 +10,6 @@ import os
 from unittest import TestCase
 
 from decimal import Decimal
-from datetime import date, datetime 
 # Before importing app, set environmental variable to use a test db for tests
 
 os.environ['DATABASE_URL'] = 'postgresql:///omakase-test'

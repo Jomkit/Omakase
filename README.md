@@ -86,6 +86,14 @@ There are two main user flows associated with this app.
 - Running individual tests is as easy as specifying the file: `python -m unittest tests.test_basic_routes` for example. 
     - Simply replace `test_basic_routes` with whichever test file you'd like to run specifically, in the `tests` folder.
 
+## Future Functionality
+In the future, functionality I would like to implement include:
+* Sign-in and user profiles for customers to save favorite orders save delivery information
+* Reservation system
+* Dine-in waitlist
+* Interactive and editable floor plan view
+* File upload functionality for managers/owners adding pictures of the restaurant to landing page
+
 ## Resources Used
 ### API
 - Created custom RESTful API to handle dynamic order updates.

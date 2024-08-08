@@ -36,23 +36,6 @@ with app.app_context():
         User(restaurant_id=1, name='test', uname='testmanager', password=User.hash_pw('123test123'), address='123 Test St.', birthday='1/1/1990',
              roles=[Role.query.filter_by(name='manager').first()], 
              groups=[Group.query.filter_by(name='employee').first()]),
-        # User(restaurant_id=1, name='Jeff', password=User.hash_pw('regTestUser'), address='1 Jeff Ln', birthday='1/1/1990',
-        #      roles=[Role.query.filter_by(name='waitstaff').first()], 
-        #      groups=[Group.query.filter_by(name='employee').first()]),
-        # User(restaurant_id=1, name='Karly', password=User.hash_pw('regTestUser2'), address='2 Jeff Ln', birthday='1/2/1990',
-        #      roles=[Role.query.filter_by(name='waitstaff').first()], 
-        #      groups=[Group.query.filter_by(name='employee').first()]),
-        # User(restaurant_id=1, name='Greg', password=User.hash_pw('regTestUser3'), address='1 Main St', birthday='1/4/1980',
-        #      roles=[Role.query.filter_by(name='kitchen').first()], 
-        #      groups=[Group.query.filter_by(name='employee').first()]),
-        # User(restaurant_id=1, name='Julianne', password=User.hash_pw('regTestUser4'), address='1 Main St', birthday='1/4/1980', 
-        #      groups=[Group.query.filter_by(name='employee').first()]),
-        # User(restaurant_id=1, name='John', password=User.hash_pw('regTestUser5'), address='1 Main St', birthday='1/4/1980', 
-        #      roles=[Role.query.filter_by(name='manager').first()], 
-        #      groups=[Group.query.filter_by(name='employee').first()]),
-        # User(restaurant_id=1, name='Jacque', password=User.hash_pw('regTestUser6'), address='1 Main St', birthday='1/4/1980', 
-        #      roles=[Role.query.filter_by(name='manager').first()], 
-        #      groups=[Group.query.filter_by(name='employee').first()])
     ]
 
     db.session.add_all(employees)

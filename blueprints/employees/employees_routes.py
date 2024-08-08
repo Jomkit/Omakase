@@ -1,12 +1,13 @@
 ############# Employee Routes Blueprint #############
 
 from flask import Blueprint, render_template, redirect, flash, session, url_for, current_app, abort
+from flask_login import login_user
 from models.db import db
 from models.user_models import User, Role, Group
 from models.restaurant_models import Restaurant
 from models.order_models import Order
 from models.item_models import MenuItem, Intolerant
-from forms import SignupForm, AddMenuItemForm, EditRestaurantForm
+from forms import SignupForm, LoginForm, AddMenuItemForm, EditRestaurantForm
 
 from flask_authorize import Authorize
 from flask_login import current_user
@@ -46,6 +47,23 @@ def employee_signup():
 
     return render_template('signup.html', form=form, form_name='Add Employee', group='Employees')
 
+@employees_bp.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = User.Authenticate(form.username.data, form.password.data)
+        if not user:
+            flash('Employee credentials incorrect, check username and password', 'danger')
+            return redirect(url_for('login'))
+        login_user(user)
+
+        flash(f'Welcome back {user.username}', 'success')
+        return redirect(url_for('employees.dashboard'))
+        
+    return render_template('login.html', form=form)
+
+
 @employees_bp.route('/list')
 @authorize.in_group('employee')
 def show_employee_list():
@@ -53,7 +71,7 @@ def show_employee_list():
 
     return render_template('employee-list.html', employees=employees)
     
-@employees_bp.route('/employee-dashboard')
+@employees_bp.route('/dashboard')
 @authorize.in_group('employee')
 def dashboard():
     """Starting view for employees"""
@@ -102,7 +120,6 @@ def add_menu_item():
 def delete_user(id):
     """Delete User by id"""
 
-    #NOTE need to cover the case where a manager might accidentally delete themself
     if(current_user.id == id):
         raise abort(401)
     
