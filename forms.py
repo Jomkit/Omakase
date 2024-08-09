@@ -22,7 +22,7 @@ class BootstrapListWidget(widgets.ListWidget):
  
 class MultiCheckboxField(SelectMultipleField):
     """
-    A multiple-select, except displays a list of checkboxes.
+    A multiple-select, a list of checkboxes.
  
     Iterating the field will produce subfields, allowing custom rendering of
     the enclosed checkbox fields.
@@ -45,9 +45,9 @@ class AddMenuItemForm(FlaskForm):
 
     vegetarian = BooleanField("Vegetarian")
 
-    description = TextAreaField('Description', validators=[Optional()])
-
     cost = DecimalField('Cost*')
+
+    description = TextAreaField('Description', validators=[Optional()])
     
     # Single choice for now, will need to figure out how to add more later. Might use JS and a button
     ingredients = FieldList(StringField('Ingredients', validators=[Optional()], filters=[lambda x: x or None]), min_entries=3, max_entries=30)

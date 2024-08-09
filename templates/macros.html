@@ -251,25 +251,26 @@
     <form id="{{ id_attr }}-form" method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
 
-    {% for field in form
-            if field.widget.input_type != 'hidden' %}
-
+    {% for field in form if field.widget.input_type != 'hidden' %}
         
         {% if field.type == "DecimalField" %}
 
             {{ field.label(class_='form-check-label') }}
-        <div class="input-group mb-3">
-            <span class="input-group-text">$</span>
-        </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                {{ field(class_="form-control")}}
+            </div>
         
         {% elif field.type == "BooleanField" %}
 
         <div class="form-check form-check-inline">
             {{ field.label(class_='form-check-label') }}
+            {{ field(class_="form-check-input") }}
+        </div>
         {% elif field.type == "FieldList" %}
 
         {{ field.label }}
-        <div class="container bg-white rounded py-2">
+        <div class="container-fluid bg-white rounded py-2">
             {% for subfield in field %}
             {{ subfield(class_="form-control my-3") }}
             {% endfor %}
@@ -278,7 +279,7 @@
         {% elif field.type == "FormField" %}
 
         {{ field.label }}
-        <div class="container bg-white rounded py-2">
+        <div class="container-fluid bg-white rounded p-2">
             {% for subfield in field if subfield.widget.input_type != 'hidden' %}
             {{ subfield.label }}
             {{ subfield(class_="form-control my-3") }}

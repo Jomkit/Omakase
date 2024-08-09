@@ -159,7 +159,12 @@ def thank_you_page():
     Returns a rendered thank you template
     """
 
-    # make sure user is coming from a valid
+    # make sure user is coming from a valid url
+    referrer = request.referrer
+    valid_url = url_for('customers.payment_page', _external=True)
+    if referrer != valid_url:
+        return redirect(url_for('customers.landing_page'))
+    
     # validate that curr_table exists before trying to clear it
     curr_table = Table.query.get(session.get('curr_table_num'))
     if curr_table:
@@ -167,8 +172,6 @@ def thank_you_page():
         session.pop('curr_table_num')
 
     order = Order.query.get(session.get('current_order_id'))
-    if order is None:
-        return redirect(url_for('customers.landing_page'))
     order.close()
     
     session.pop('current_order_id')
