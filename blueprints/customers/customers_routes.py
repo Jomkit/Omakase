@@ -69,6 +69,11 @@ def assign_table_number():
 @employee_redirect
 def order_page():
     """Display order page with menu and updating itemized bill on the side"""
+
+    # redirect if no current order
+    if not session.get('current_order_id'):
+        return redirect(url_for('customers.landing_page'))
+    
     restaurant = db.session.query(Restaurant).filter_by(id=session['restaurant_id']).first()
     meal_types = {item.meal_type for item in restaurant.menu}
     curr_order_type = db.session.query(Order.type).filter_by(id=(session['current_order_id'])).first()

@@ -94,8 +94,14 @@ class Order {
         // console.log(res.data.data.ordered_items);
         return res.data.data.ordered_items;
     }
+
+    async toggleAssistance() {
+        const data = {data: {need_assistance: true}};
+        await axios.patch(`${this.baseURL}/${this.id}/update`, data);
+    }
+    
     async addToOrder(menuItemId){
-        let res = await axios.patch(`${this.baseURL}/${this.id}/add_item`, {
+        await axios.patch(`${this.baseURL}/${this.id}/add_item`, {
             menu_item_id: menuItemId
         });
     }
@@ -146,9 +152,11 @@ function flashAssistMsg(){
     $('nav').after(html);
 }
 
-$bill.on('click', (evt) => {
+// Handle assist-btn click
+$bill.on('click', async (evt) => {
     if(evt.target.getAttribute('id') == "assist-btn"){
         console.log('Assist');
+        await order.toggleAssistance();
         flashAssistMsg();
     }
 });

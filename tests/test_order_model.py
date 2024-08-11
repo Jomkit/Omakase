@@ -165,3 +165,18 @@ class OrderModelTestCase(TestCase):
         new_order = Order.create(type='Takeout')
         self.assertIsInstance(new_order, Order)
         self.assertEqual(new_order.type, 'Takeout')
+
+    def test_order_update(self):
+        """Does Order.update() update an order?"""
+        self.assertEqual(self.test_order.type, 'Takeout')
+        self.test_order.update({'type': 'Delivery'})
+        self.assertEqual(self.test_order.type, 'Delivery')
+
+    def test_order_partial_update(self):
+        """Does Order.update() update multiple fields in an order?"""
+        self.assertEqual(self.test_order.type, "Takeout")
+        self.assertEqual(self.test_order.active, True)
+
+        self.test_order.update({'type': 'Delivery', 'active': False})
+        self.assertEqual(self.test_order.type, "Delivery")
+        self.assertEqual(self.test_order.active, False)

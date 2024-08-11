@@ -19,6 +19,8 @@ class Order(db.Model):
 
     active = db.Column(db.Boolean, nullable=False, default=True)
 
+    need_assistance = db.Column(db.Boolean, nullable=False, default=False)
+
     type = db.Column(db.String, nullable=False, default='Dining In')
 
     payment_method = db.Column(db.String)
@@ -48,6 +50,7 @@ class Order(db.Model):
             "id": o.id,
             "table_number": o.table_number,
             "active": o.active,
+            "need_assistance": o.need_assistance,
             "type": o.type,
             "timestamp": o.timestamp,
 
@@ -80,6 +83,12 @@ class Order(db.Model):
     def update(self, data):
         for k,v in data.items():
             setattr(self, k, v)
+        
+        try:
+            db.session.commit()
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print("An error occurred while updating order:", e)
 
     def close(self):
         """Closes order"""

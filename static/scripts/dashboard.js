@@ -1,6 +1,11 @@
 let $activeOrders = $('.order-active');
 let $timestamps = $('.timestamps');
 const $orderArea = $('.order-area');
+
+// enable tooltips
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 async function toggleOrder(id, state){
     let res = await axios.patch(`/omakase/api/order/${id}/update`, {
         "data": {
@@ -8,6 +13,13 @@ async function toggleOrder(id, state){
         }
     });
     location.reload();
+}
+
+async function toggleAssistance(id) {
+    console.log('clicked');
+    const data = {data: {need_assistance: false}};
+    await axios.patch(`/omakase/api/order/${id}/update`, data);
+
 }
 
 $orderArea.on('click', (evt) => {
@@ -18,6 +30,9 @@ $orderArea.on('click', (evt) => {
         if(evt.target.innerText == "Open Order"){
             toggleOrder(evt.target.parentNode.getAttribute('id'), true);
         }
+    } else if(evt.target.getAttribute('id') == 'toggle-assistance'){
+        toggleAssistance(evt.target.parentNode.parentNode.getAttribute('id'));
+        evt.target.setAttribute('disabled', true);
     }
 })
 

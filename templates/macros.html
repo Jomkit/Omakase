@@ -157,7 +157,14 @@
     </div>
     
     <div class="card-body" id="{{order.id}}">
-        <h5 class="card-title">Order #{{order.id}}</h5>
+        <h5 class="card-title">Order #{{order.id}}
+        {% if order.need_assistance %}
+        <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Customer needs assistance, click when resolved" id="toggle-assistance">
+            <span><i class="fa-solid fa-lightbulb text-warning"></i></span>
+        </button>
+        {% endif %}
+        </h5>
+
         {% if order.type == "Dining In" %}
         <h6 class="card-subtitle mb-2 text-muted">{{order.type}} - Table {{order.table_number}}</h6>
         {% else %}
