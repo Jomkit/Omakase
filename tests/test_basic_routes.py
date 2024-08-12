@@ -8,8 +8,7 @@
 
 import os
 # from dotenv import load_env
-from flask import get_flashed_messages, session
-from flask_login import login_user, logout_user
+from flask import session
 from unittest import TestCase
 
 # Before importing app, set environmental variable to use a test db for tests

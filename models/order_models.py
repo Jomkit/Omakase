@@ -43,7 +43,12 @@ class Order(db.Model):
             print("An error occurred while creating a new order:", e)
         return new_order
     
+        """
+        This class method is used to serialize an Order object into a dictionary format for use in JSON.
+        It takes an Order object as a parameter and returns a dictionary containing the order's details.
 
+        The ordered items are represented as a list of dictionaries, each containing the item's id and quantity.
+        """
     @classmethod
     def serialize(cls, o):
         data = {
