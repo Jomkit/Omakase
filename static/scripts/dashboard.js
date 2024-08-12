@@ -7,7 +7,7 @@ const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 async function toggleOrder(id, state){
-    let res = await axios.patch(`/omakase/api/order/${id}/update`, {
+    let res = await axios.patch(`/omakase/api/order/${id}`, {
         "data": {
             "active": state
         }
@@ -18,7 +18,7 @@ async function toggleOrder(id, state){
 async function toggleAssistance(id) {
     console.log('clicked');
     const data = {data: {need_assistance: false}};
-    await axios.patch(`/omakase/api/order/${id}/update`, data);
+    await axios.patch(`/omakase/api/order/${id}`, data);
 
 }
 

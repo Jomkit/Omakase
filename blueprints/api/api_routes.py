@@ -18,7 +18,7 @@ def get_all_orders():
 
     return(jsonify(data=data), 200)
 
-@api_bp.route('/order/get_order/<int:id>')
+@api_bp.route('/order/<int:id>')
 def get_order(id):
     """get an order object and return jsonified order object"""
     order = Order.query.get_or_404(id)
@@ -26,14 +26,14 @@ def get_order(id):
     data = Order.serialize(order)
     return (jsonify(data=data), 200)
 
-@api_bp.route('/order/new', methods=['POST'])
+@api_bp.route('/order', methods=['POST'])
 def new_order():
     """Create new order"""
     new_order = Order.create(**request.json)
     data = Order.serialize(new_order)
     return (jsonify(data=data), 200)
 
-@api_bp.route('/order/<int:id>/update', methods=['PATCH'])
+@api_bp.route('/order/<int:id>', methods=['PATCH'])
 def update_order(id):
     """Update existing orders"""
     order = Order.query.get_or_404(id)
@@ -57,7 +57,7 @@ def add_to_order(id):
     return (jsonify(updated_order=data), 202)
 
 ##############MENU API##################
-@api_bp.route('/menu/get_menu_item/<int:id>')
+@api_bp.route('/menu/<int:id>')
 def get_menu_item(id):
     menu_item = MenuItem.query.get_or_404(id)
 

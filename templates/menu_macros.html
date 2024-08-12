@@ -1,0 +1,46 @@
+{% macro menu_tab_header(types) %}
+    {% for type in types %}
+        {% if loop.first %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="{{ type }}s-tab" data-bs-toggle="tab" data-bs-target="#{{ type }}s" type="button" role="tab" aria-controls="{{ type }}s" aria-selected="true">{{type.split() | first | capitalize}}s</button>
+        </li>
+        {% else %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="{{ type }}s-tab" data-bs-toggle="tab" data-bs-target="#{{ type }}s" type="button" role="tab" aria-controls="{{ type }}s" aria-selected="true">{{type.split() | first | capitalize}}s</button>
+        </li>
+
+        {% endif %}
+
+    {% endfor %}
+{% endmacro %}
+
+{% macro menu_cards_generator(items, type) %}
+
+<div class="container-fluid row gy-3">
+    {% for item in items %}
+    {% if item.meal_type == type %}
+        {{ food_card(item=item) }}
+    {% endif %}
+    
+    {% endfor %}
+    
+</div>
+
+{% endmacro %}
+
+{% macro menu_tab(items, types) %}
+{% for type in types %}
+
+    {% if loop.first %}
+    <div class="tab-pane fade show active" id="{{ type }}s" role="tabpanel" aria-labelledby="{{ type }}-tab">
+        {{ menu_cards_generator(items, type) }}
+    </div>
+    {% else %}
+    <div class="tab-pane fade" id="{{ type }}s" role="tabpanel" aria-labelledby="{{ type }}-tab">
+        {{ menu_cards_generator(items, type) }}
+    </div>
+    {% endif %}
+
+{% endfor %}
+
+{% endmacro %}

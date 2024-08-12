@@ -54,7 +54,7 @@ class MenuItem {
         this.baseURL = '/omakase/api/menu';
     }
     async getMenuItem(id){
-        let res = await axios.get(`${this.baseURL}/get_menu_item/${id}`);
+        let res = await axios.get(`${this.baseURL}/${id}`);
         return res.data.data;
     }
     async putMenuItem(id, qty=1){
@@ -90,14 +90,14 @@ class Order {
         this.id = id;
     }
     async getOrderedItems(){
-        let res = await axios.get(`${this.baseURL}/get_order/${this.id}`);
+        let res = await axios.get(`${this.baseURL}/${this.id}`);
         // console.log(res.data.data.ordered_items);
         return res.data.data.ordered_items;
     }
 
     async toggleAssistance() {
         const data = {data: {need_assistance: true}};
-        await axios.patch(`${this.baseURL}/${this.id}/update`, data);
+        await axios.patch(`${this.baseURL}/${this.id}`, data);
     }
     
     async addToOrder(menuItemId){

@@ -114,14 +114,14 @@ class ApiTestCase(TestCase):
         self.assertIn('timestamp', html)
 
     def test_get_order_by_id(self):
-        resp = self.client.get('/omakase/api/order/get_order/1')
+        resp = self.client.get('/omakase/api/order/1')
         html = resp.get_data(as_text=True)
 
         self.assertEqual(resp.status_code, 200)
         self.assertIn('"type": "Takeout"', html)
 
     def test_post_new_order(self):
-        resp = self.client.post('/omakase/api/order/new', 
+        resp = self.client.post('/omakase/api/order', 
                                 json={
                                     'table_number': 1,
                                     'type':'Dining In'
@@ -132,7 +132,7 @@ class ApiTestCase(TestCase):
         self.assertIn('timestamp', html)   
 
     def test_post_new_order_sqlalchemy_error(self):
-        resp = self.client.post('/omakase/api/order/new', 
+        resp = self.client.post('/omakase/api/order', 
                                 json={
                                     'table_number': 999,
                                     'type':'Dining In'
@@ -146,7 +146,7 @@ class ApiTestCase(TestCase):
         
         3/29/24 - Currently the route only updates order active status
         """
-        resp = self.client.patch(f'/omakase/api/order/{self.test_order.id}/update',
+        resp = self.client.patch(f'/omakase/api/order/{self.test_order.id}',
                                 json={
                                     'data': {
                                         'active': False
@@ -169,7 +169,7 @@ class ApiTestCase(TestCase):
         self.assertIn('ordered_items', html)
 
     def test_get_menu_item(self):
-        resp = self.client.get(f'omakase/api/menu/get_menu_item/{self.testItem.id}')
+        resp = self.client.get(f'omakase/api/menu/{self.testItem.id}')
         html = resp.get_data(as_text=True)
 
         self.assertEqual(resp.status_code, 200)
