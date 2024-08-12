@@ -81,12 +81,14 @@ def order_page():
     return render_template('order.html', items=restaurant.menu, types = meal_types, order_type = curr_order_type)
 
 @customers_bp.route('/takeout')
+@order_active
 @employee_redirect
 def takeout_page():
     state='takeout'
     return redirect(url_for('customers.contact_form', state=state))
 
 @customers_bp.route('/delivery')
+@order_active
 @employee_redirect
 def delivery_page():
     state='delivery'
@@ -132,6 +134,12 @@ def contact_form(state):
 @customers_bp.route('/checkout')
 @employee_redirect
 def checkout_page():
+    # make sure user is coming from a valid url
+    referrer = request.referrer
+    valid_url = url_for('customers.order_page', _external=True)
+    if referrer != valid_url:
+        return redirect(url_for('customers.landing_page'))
+    
     # curr_order_type = Order.query.get_or_404(session['current_order_id'])
     curr_order_type = db.session.query(Order.type).filter_by(id=(session['current_order_id'])).first()
     return render_template('checkout.html', order_type=curr_order_type)
@@ -144,6 +152,13 @@ def payment_page():
     Returns a rendered payment page
     """
     form = PaymentMethodForm()
+        
+    # make sure user is coming from a valid url
+    referrer = request.referrer
+    valid_url = url_for('customers.checkout_page', _external=True)
+    if referrer != valid_url:
+        return redirect(url_for('customers.landing_page'))
+    
     
     if form.validate_on_submit():
         curr_order = Order.query.get(session.get('current_order_id'))
