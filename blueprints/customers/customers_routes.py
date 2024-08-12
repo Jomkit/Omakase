@@ -153,11 +153,11 @@ def payment_page():
     """
     form = PaymentMethodForm()
         
-    # make sure user is coming from a valid url
-    referrer = request.referrer
-    valid_url = url_for('customers.checkout_page', _external=True)
-    if referrer != valid_url:
-        return redirect(url_for('customers.landing_page'))
+    # # make sure user is coming from a valid url
+    # referrer = request.referrer
+    # valid_url = url_for('customers.checkout_page', _external=True)
+    # if referrer != valid_url:
+    #     return redirect(url_for('customers.landing_page'))
     
     
     if form.validate_on_submit():
