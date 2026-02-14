@@ -4,8 +4,6 @@
 
 **This app was built using Python, specifically the Flask web app framework, JavaScript jQuery, and PostgreSQL for databasing.**
 
-Try out the app at: [Omakase OMS](https://omakase-ma8t.onrender.com)
-
 ### Quickstart
 - After following [Setup](#setup) below, all you have to do to get started is run the flask server and you'll be greeted with the landing page. Either run through the userflow for customers by clicking any one of the Header Tabs or the options "Dining In," "Takeout," or "Delivery."
 - If you'd like to check out the employee userflow, from the base url add `/login`. I recommend using the pre-seeded manager user instance, username: "testmanager" and password: "123test123."
